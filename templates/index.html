@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+    .text-white {
+        color: white;
+    }
+    body {
+        background-color: gray;
+    }
+</style>
+
+<body style="background-color:gray">
+
+    <nav class="navbar" style="background-color:#24d0d9">
+        <a class="navbar-brand" href="/recommend">SearchBookRecommendation</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about_us">About Us</a></li>
+           <li><a href="/view_books">View Books</a></li>
+           <!-- <li><a href="//recommendations">Recommendations</a></li> -->
+            {% if session['loggedin'] %}
+            <li><a href="/logout">Logout</a></li>
+            {% else %}
+            
+            <li><a href="/login">Login</a></li>
+             {% endif %}
+        </ul>
+          
+            <!-- <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about_us">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="/view_books">View Books</a></li>
+                <li class="nav-item"><a class="nav-link" href="/recommendations">Recommendations</a></li>
+                {% if session['loggedin'] %}
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        {% endif %}
+            </ul> -->
+               
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-white" style="font-size:40px">Top 50 Books</h1>
+            </div>
+
+            {% for i in range(book_name|length) %}
+                <div class="col-md-3" style="margin-top:70px">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{ image[i] }}" alt="Book Image">
+                            <p class="text-white">{{ book_name[i] }}</p>
+                            <h5 class="text-white">{{ author[i] }}</h5>
+                            <h5 class="text-white">Votes - {{ votes[i] }}</h5>
+                            <h5 class="text-white">Rating - {{ rating[i] }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS (optional) -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
